@@ -41,35 +41,45 @@ public class Principal {
                     \t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                     """;
 
-            System.out.println(menu);
-            System.out.println("Opcion: ");
-            opcion = teclado.nextInt();
-            teclado.nextLine();
 
-            switch (opcion) {
-                case 1:
-                    buscarLibro();
-                    break;
-                case 2:
-                    mostrarLibrosRegistrados();
-                    break;
-                case 3:
-                  mostrarAutoresRegistrados();
-                    break;
-                case 4:
-                    listaAutoresVivos();
-                    break;
-                case 5:
-                    buscarLibroPorIdioma();
-                    break;
-          
-                case 0:
-                    System.out.println("Saliendo de la Libreria LiterAlura... ");
-                    break;
-                default:
-                    System.out.printf("Opción inválida\n");
+           try {
+               System.out.println(menu);
+               System.out.println("Opcion: ");
+               opcion = teclado.nextInt();
+               teclado.nextLine();
 
-            }
+               switch (opcion) {
+                   case 1:
+                       buscarLibro();
+                       break;
+                   case 2:
+                       mostrarLibrosRegistrados();
+                       break;
+                   case 3:
+                       mostrarAutoresRegistrados();
+                       break;
+                   case 4:
+                       listaAutoresVivos();
+                       break;
+                   case 5:
+                       buscarLibroPorIdioma();
+                       break;
+
+                   case 0:
+                       System.out.println("Saliendo de la Libreria LiterAlura... ");
+                       System.exit(0);
+                       break;
+                   default:
+                       System.out.printf("Opción inválida\n");
+
+               }
+           }catch (InputMismatchException e){
+               System.out.println("Opción invalida. Ingresa un numero Entero!!");
+               teclado.nextLine();
+               opcion = -1;
+
+           }
+
         }
     }
 
@@ -175,8 +185,12 @@ public class Principal {
                     en - Inglés
                     fr - Francés
                     pt - Portugués
+                    it - Italiano
+                    ja - Japones
+                    la - Latín
 
                     0. Regresar al menu principal
+                    1. Salir
                     """;
             System.out.println("Elige un idioma: \n" + idioma);
             opcion = teclado.nextLine();
@@ -201,11 +215,28 @@ public class Principal {
                     idiomaPortugues.forEach(System.out::println);
                     break;
 
+                case "it":
+                    List<Libro> idiomaItaliano = busquedaLibroPorIdioma("[it]");
+                    idiomaItaliano.forEach(System.out::println);
+                    break;
+
+                case "ja":
+                    List<Libro> idiomaJapones = busquedaLibroPorIdioma("[ja]");
+                    idiomaJapones.forEach(System.out::println);
+                    break;
+
+                case "la":
+                    List<Libro> idiomaLatin = busquedaLibroPorIdioma("[la]");
+                    idiomaLatin.forEach(System.out::println);
+                    break;
+
                 default:
                     System.out.println("No se encontraron libros con este idioma");
 
                 case "0":
                     return;
+                case "1":
+                    System.exit(0);
             }
         }
     }
